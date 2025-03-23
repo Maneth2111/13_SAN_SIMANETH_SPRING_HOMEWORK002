@@ -24,8 +24,10 @@ public class StudentController {
     // get all Student
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<Student>>> getStudents() {
-        List<Student> students = studentService.getStudents();
+    public ResponseEntity<ApiResponse<List<Student>>> getStudents(
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "10") Integer size) {
+        List<Student> students = studentService.getStudents(page, size);
         ApiResponse<List<Student>> response = ApiResponse.<List<Student>>builder()
                 .message("Get all students")
                 .payload(students)

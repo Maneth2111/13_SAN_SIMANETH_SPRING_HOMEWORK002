@@ -18,8 +18,8 @@ public class StudentImp implements StudentService {
     }
 
     @Override
-    public List<Student> getStudents() {
-        return studentRepo.findAllStudents();
+    public List<Student> getStudents(Integer page, Integer size) {
+        return studentRepo.findAllStudents(page,size);
     }
 
     @Override

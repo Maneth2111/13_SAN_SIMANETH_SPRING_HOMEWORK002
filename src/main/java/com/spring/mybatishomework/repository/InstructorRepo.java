@@ -7,13 +7,17 @@ import java.util.List;
 
 @Mapper
 public interface InstructorRepo {
-    @Select("select * from instructors")
+    @Select("""
+    select  * from instructors
+    offset  #{size} * (#{page}-1)
+    limit   #{size}
+    """)
     @Results(id = "instructorMapping",value = {
             @Result(property = "instructorId",column = "instructor_id"),
             @Result(property = "instructorName",column = "instructor_name"),
             @Result(property = "instructorEmail",column = "email")
     })
-    List<Instructor> getInstructor();
+    List<Instructor> getInstructor(Integer page, Integer size);
 
 
 

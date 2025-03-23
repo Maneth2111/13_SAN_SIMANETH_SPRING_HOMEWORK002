@@ -6,7 +6,7 @@ import com.spring.mybatishomework.model.request.InstructorRequest;
 import java.util.List;
 
 public interface InstructorService {
-    List<Instructor> getAllInstructors();
+    List<Instructor> getAllInstructors(Integer page ,Integer size);
 
     Instructor getInstructorById(Integer id);
 

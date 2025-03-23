@@ -33,17 +33,6 @@ public class CourseImp implements CourseService {
         return courseRepo.findCourseById(id);
     }
 
-//    @Override
-//    public Course addCourse(CourseRequest request) {
-//        Course course = new Course();
-//        course.setCourseName(request.getCourseName());
-//        course.setDescription(request.getDescription());
-////        course.setInstructorId(request.getInstructorId());
-//        Integer courseId = courseRepo.createCourse(course);
-//        course.setCourseId(courseId);
-//        return course;
-//    }
-
     public Course addCourse(CourseRequest request) {
         // Check if the instructor exists
         if (instructorRepo.findInstructorById(request.getInstructorId()) == null) {

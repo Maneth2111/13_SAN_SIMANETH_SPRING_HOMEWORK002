@@ -48,18 +48,6 @@ public class CourseController {
         return ResponseEntity.ok(response);
     }
 
-//    @PostMapping
-//    public ResponseEntity<ApiResponse<Course>> addCourse(@RequestBody CourseRequest request) {
-//        Course newCourse = courseService.addCourse(request);
-//        ApiResponse<Course> response = ApiResponse.<Course>builder()
-//                .message("Create new instructor successfully")
-//                .payload(newCourse)
-//                .status(HttpStatus.CREATED)
-//                .timestamp(LocalDateTime.now())
-//                .build();
-//        return ResponseEntity.status(HttpStatus.CREATED).body(response);
-//    }
-
     @PostMapping
     public ResponseEntity<ApiResponse<Course>> addCourse(@RequestBody CourseRequest request) {
         Course newCourse = courseService.addCourse(request);

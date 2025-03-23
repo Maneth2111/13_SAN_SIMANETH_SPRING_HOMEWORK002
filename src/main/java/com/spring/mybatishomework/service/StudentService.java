@@ -6,7 +6,7 @@ import com.spring.mybatishomework.model.request.StudentRequest;
 import java.util.List;
 
 public interface StudentService {
-    List<Student> getStudents();
+    List<Student> getStudents(Integer page, Integer size);
 
     Student getStudentById(Integer id);
 
@@ -16,4 +16,3 @@ public interface StudentService {
 
 
 }
-//    Student addNewStudent(student);
