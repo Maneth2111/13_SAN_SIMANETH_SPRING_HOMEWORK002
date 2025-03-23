@@ -36,16 +36,61 @@ public class CourseController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @GetMapping("/{courseId}")
+    public ResponseEntity<ApiResponse<Course>> getCourseById(@PathVariable Integer courseId) {
+        Course course = courseService.getCourseById(courseId);
+        ApiResponse<Course> response = ApiResponse.<Course>builder()
+                .message("Get course by id")
+                .payload(course)
+                .status(HttpStatus.OK)
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+//    @PostMapping
+//    public ResponseEntity<ApiResponse<Course>> addCourse(@RequestBody CourseRequest request) {
+//        Course newCourse = courseService.addCourse(request);
+//        ApiResponse<Course> response = ApiResponse.<Course>builder()
+//                .message("Create new instructor successfully")
+//                .payload(newCourse)
+//                .status(HttpStatus.CREATED)
+//                .timestamp(LocalDateTime.now())
+//                .build();
+//        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+//    }
+
     @PostMapping
     public ResponseEntity<ApiResponse<Course>> addCourse(@RequestBody CourseRequest request) {
         Course newCourse = courseService.addCourse(request);
         ApiResponse<Course> response = ApiResponse.<Course>builder()
-                .message("Create new instructor successfully")
+                .message("Course created successfully")
                 .payload(newCourse)
                 .status(HttpStatus.CREATED)
                 .timestamp(LocalDateTime.now())
                 .build();
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
+    @PutMapping("/{courseId}")
+    public ResponseEntity<ApiResponse<Course>> updateCourse(@PathVariable Integer courseId,
+                                                            @RequestBody CourseRequest request) {
+        Course updatedCourse = courseService.updateCourse(courseId, request);
+        ApiResponse<Course> response = ApiResponse.<Course>builder()
+                .message("Course updated successfully")
+                .payload(updatedCourse)
+                .status(HttpStatus.OK)
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{courseId}")
+    public ResponseEntity<ApiResponse<Void>> deleteCourse(@PathVariable Integer courseId) {
+        courseService.deleteCourse(courseId);
+        return ResponseEntity.noContent().build();
+    }
+
+
 }
 

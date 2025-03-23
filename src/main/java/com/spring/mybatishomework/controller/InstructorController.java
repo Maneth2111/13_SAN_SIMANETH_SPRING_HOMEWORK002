@@ -53,7 +53,7 @@ public class InstructorController {
     public ResponseEntity<ApiResponse<Instructor>> createInstructor(@RequestBody InstructorRequest request) {
         Instructor newInstructor = instructorService.createInstructor(request);
         ApiResponse<Instructor> response = ApiResponse.<Instructor>builder()
-                .message("Create new instructor successfully")
+                .message("Instructor created successfully")
                 .payload(newInstructor)
                 .status(HttpStatus.CREATED)
                 .timestamp(LocalDateTime.now())
@@ -73,6 +73,12 @@ public class InstructorController {
                 .timestamp(LocalDateTime.now())
                 .build();
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @DeleteMapping("/{instructorId}")
+    public ResponseEntity<ApiResponse<Void>> deleteInstructor(@PathVariable("instructorId") Integer id) {
+        instructorService.deleteInstructor(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -1,7 +1,6 @@
 package com.spring.mybatishomework.repository;
 
 import com.spring.mybatishomework.model.Instructor;
-import com.spring.mybatishomework.model.request.InstructorRequest;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -25,37 +24,18 @@ public interface InstructorRepo {
     @ResultMap("instructorMapping")
     Instructor findInstructorById(Integer id);
 
+    @Insert("""
+        INSERT INTO instructors(instructor_name, email) 
+        VALUES (#{instructorName}, #{instructorEmail}) RETURNING instructor_id
 
-    @Select("""
-        insert into instructors(instructor_name, email)
-        values (#{Instructor.instructorName},#{Instructor.instructorEmail})
-        returning instructor_id;
     """)
-    @ResultMap("instructorMapping")
-    Instructor createInstructor(@Param("Instructor") InstructorRequest request);
-
-//    void updateInstructor(Integer id, InstructorRequest request);
-
-    @Insert("update instructors set instructor_name = #{instructor.instructorName}, email = #{instructor.instructorEmail} where instructor_id = #{id}")
-    void updateInstructor(@Param("id") Integer id, @Param("instructor") InstructorRequest instructor);
-
-//        @Update("""
-//        update instructors
-//        set instructor_name = #{instructorName}, email = #{instructorEmail}
-//        where instructor_id = #{instructorId}
-//        returning *
-//    """)
-//    @ResultMap("instructorMapping")
-//    Instructor updateInstructor(Integer id, InstructorRequest request);
-//
+    Integer createInstructor(Instructor instructor);
 
 
-//    @Select("""
-//        update instructors
-//        set instructor_name = #{Instructor.instructorName}, email = #{Instructor.instructorEmail}
-//        where instructor_id = #{Instructor.instructorId}
-//        returning *
-//    """)
-//    @ResultMap("instructorMapping")
-//    Instructor updateInstructorById(Integer id,Instructor request);
+    @Update("UPDATE instructors SET instructor_name = #{instructorName}, email = #{instructorEmail} WHERE instructor_id = #{instructorId}")
+    void updateInstructor(Instructor instructor);
+
+    @Delete("DELETE FROM instructors WHERE instructor_id = #{id}")
+    void deleteInstructor(Integer id);
+
 }

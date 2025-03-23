@@ -29,19 +29,27 @@ public class InstructorImp implements InstructorService {
     }
 
     @Override
-    public Instructor createInstructor(InstructorRequest instructor) {
-        return instructorRepo.createInstructor(instructor);
+    public Instructor createInstructor(InstructorRequest request) {
+        Instructor instructor = new Instructor();
+        instructor.setInstructorName(request.getInstructorName());
+        instructor.setInstructorEmail(request.getInstructorEmail());
+        Integer instructorId = instructorRepo.createInstructor(instructor);
+        instructor.setInstructorId(instructorId);
+        return instructor;
     }
 
     @Override
     public Instructor updateInstructorById(Integer id, InstructorRequest request) {
-        instructorRepo.updateInstructor(id, request);
+        Instructor instructor = new Instructor();
+        instructor.setInstructorId(id);
+        instructor.setInstructorName(request.getInstructorName());
+        instructor.setInstructorEmail(request.getInstructorEmail());
+        instructorRepo.updateInstructor(instructor);
         return instructorRepo.findInstructorById(id);
     }
 
-//    @Override
-//    public Instructor updateInstructorById(Integer id, Instructor request) {
-//        request.setInstructorId(id); // ✅ Ensure ID is set in the request
-//        return instructorRepo.updateInstructor(request);
-//    }
+    @Override
+    public void deleteInstructor(Integer id) {
+        instructorRepo.deleteInstructor(id);
+    }
 }

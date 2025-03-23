@@ -10,5 +10,11 @@ public interface CourseService {
 
     List<Course> getAllCourses();
 
+    Course getCourseById(Integer id);
+
+//    Course addCourse(CourseRequest request);
     Course addCourse(CourseRequest request);
+
+    Course updateCourse(Integer id, CourseRequest request);
+    void deleteCourse(Integer id);
 }

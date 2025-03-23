@@ -13,4 +13,6 @@ public interface InstructorService {
     Instructor createInstructor(InstructorRequest request);
 
     Instructor updateInstructorById(Integer id,InstructorRequest request);
+
+    void deleteInstructor(Integer id);
 }

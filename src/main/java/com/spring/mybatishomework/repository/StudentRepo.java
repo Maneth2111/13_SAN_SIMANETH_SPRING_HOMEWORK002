@@ -26,6 +26,15 @@ public interface StudentRepo {
     @ResultMap("studentMapping")
     Student findStudentById(Integer id);
 
+    @Insert("INSERT INTO students(student_name, email, phone_number) VALUES (#{studentName}, #{studentEmail}, #{phoneNumber}) RETURNING student_id")
+    Integer createStudent(Student student);
+
+    @Update("UPDATE students SET student_name = #{studentName}, email = #{studentEmail}, phone_number = #{phoneNumber} WHERE student_id = #{studentId}")
+    void updateStudent(Student student);
+
+    @Delete("DELETE FROM students WHERE student_id = #{id}")
+    void deleteStudent(Integer id);
+
 
 }
-//    Student addNewStudent();
+
